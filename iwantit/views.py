@@ -5,7 +5,7 @@ from django.db import connection
 #import models
 from django.template.loader import get_template
 from django.template import Context
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 #
 # def index(request):
 #     t = get_template('iwantit/index.html')
@@ -13,13 +13,14 @@ from django.shortcuts import render
 #     return render(request)
 
 def index(request):
-    prod_query = "select * from userTable"
+    prod_query = "select * from donatedList"
     cursor1 = connection.cursor()
     cursor1.execute(prod_query)
     prod_result = cursor1.fetchall()
-    template = loader.get_template('iwantit/index.html')
-    context = RequestContext(request, None)
-    return HttpResponse(template.render(context))
+    # template = loader.get_template('iwantit/index.html')
+    # context = RequestContext(request, prod_result)
+    # return HttpResponse(template.render(context))
+    return render_to_response('iwantit/index.html', {'prod_result': prod_result})
 
 def profile(request):
     template = loader.get_template('iwantit/profile.html')

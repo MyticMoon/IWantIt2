@@ -5,8 +5,70 @@
 <li><a href="/iwantit/contact">Contact</a></li>
 {% endblock %}
 {% block content %}
-        <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">This is my index page.</p>
+      <div class="jumbotron">
+        <h1>Welcome to I Want It</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+        <div class= "row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4"><p><a class="btßn btn-lg btn-success" href="ShareIt.html" role="button">Share It</a></p></div>
+          <div class="col-md-4"><p><a class="btßn btn-lg btn-success" href="PickIt.html" role="button">Pick It</a></p></div>
+        </div>
+
+
       </div>
+
+        <!-- LATEST ITEMS-->
+    <div class="page-header">
+      <h1>Latest Items <small>Hurry up! Get those awesome things before others!</small></h1>
+    </div>
+
+        <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">$20 Amazon Voucher</h4>
+          </div>
+          <div class="modal-body">
+            Price: 20 pts
+            For more details, please contact Dat Gay =))
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Pick It</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Item to trigger modal -->
+    <div class="row">
+    {% for prod in prod_result %}
+      <div class="col-sm-6 col-md-3" data-toggle="modal" data-target="#myModal">
+        <div class="thumbnail" >
+          <img src="{{ prod.5 }}" alt="..." height="150px" width="100px">
+          <div class="caption">
+            <h3>{{ prod.6 }} {{ prod.3 }}</h3>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+{#      <div class="col-sm-6 col-md-3">#}
+{#        <div class="thumbnail">#}
+{#          <img data-src="holder.js/300x200" alt="...">#}
+{#          <div class="caption">#}
+{#            <h3>Zalora Gift Card $100</h3>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="col-sm-6 col-md-3">#}
+{#        <div class="thumbnail">#}
+{#          <img data-src="holder.js/300x200" alt="...">#}
+{#          <div class="caption">#}
+{#            <h3>$200 Macbook Air Discount</h3>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+    </div>
 {% endblock %}
