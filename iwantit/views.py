@@ -1,7 +1,7 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from django.db import connection
+from django.db import connection, transaction
 #import models
 from django.template.loader import get_template
 from django.template import Context
@@ -11,7 +11,10 @@ from django.shortcuts import render, render_to_response
 #     t = get_template('iwantit/index.html')
 #     mainBody = t.render(Context({}))
 #     return render(request)
+from django.views.decorators.csrf import csrf_exempt
 
+
+@transaction.commit_on_success
 def index(request):
     prod_query = "select * from donatedList"
     cursor1 = connection.cursor()
@@ -38,3 +41,18 @@ def contact(request):
     template = loader.get_template('iwantit/contact.html')
     context = RequestContext(request, None)
     return HttpResponse(template.render(context))
+
+@csrf_exempt
+def searchitem(request):
+    searchTerm = request.POST['searchTerm']
+    prod_query = 'select * from donatedList where itemName like "%%' + str(searchTerm) + '%%"'
+    cursor1 = connection.cursor()
+    cursor1.execute(str(prod_query))
+    prod_result = cursor1.fetchall()
+    # template = loader.get_template('iwantit/index.html')
+    # context = RequestContext(request, prod_result)
+    # return HttpResponse(template.render(context))
+    return render_to_response('iwantit/index.html', {'prod_result': prod_result})
+
+def shareItAction(request):
+    return render_to_response('iwantit/shareit.html', {})
