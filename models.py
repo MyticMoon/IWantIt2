@@ -10,6 +10,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+'''
 class Categorylist(models.Model):
     id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=1024L, blank=True)
@@ -62,4 +63,4 @@ class Usertable(models.Model):
     currentpoints = models.IntegerField(null=True, db_column='currentPoints', blank=True) # Field name made lowercase.
     class Meta:
         db_table = 'userTable'
-
+'''
