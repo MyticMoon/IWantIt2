@@ -17,7 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 @transaction.commit_on_success
 def index(request):
     user_id = 0
-    prod_query = "select donatedList.*, userTable.name from donatedList left join userTable on donatedList.donateduserid = userTable.id where donatedList.donateduserid <> " + str(user_id) + " order by donatedate desc limit 10;"
+    prod_query = "select donatedList.*, userTable.name from donatedList left join userTable on donatedList.donateduserid = userTable.id where donatedList.donateduserid <> " + str(user_id) + " order by donatedate desc limit 7;"
     cursor1 = connection.cursor()
     cursor1.execute(prod_query)
     prod_result = cursor1.fetchall()
@@ -46,6 +46,14 @@ def contact(request):
     template = loader.get_template('iwantit/contact.html')
     context = RequestContext(request, None)
     return HttpResponse(template.render(context))
+
+def vault(request):
+    user_id = 0
+    item_query = "select donatedList.*, userTable.name from donatedList left join userTable on donatedList.donateduserid = userTable.id where donatedList.donateduserid <> " + str(user_id)
+    item_cursor = connection.cursor()
+    item_cursor.execute(item_query)
+    items = item_cursor.fetchall()
+    return render_to_response('iwantit/vault.html', {'items': items})
 
 @csrf_exempt
 def searchitem(request):

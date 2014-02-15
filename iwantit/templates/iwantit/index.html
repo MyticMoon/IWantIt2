@@ -23,26 +23,6 @@
       <h1>Latest Items <small>Hurry up! Get those awesome things before others!</small></h1>
     </div>
 
-        <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">$20 Amazon Voucher</h4>
-          </div>
-          <div class="modal-body">
-            Price: 20 pts
-            For more details, please contact Dat Gay =))
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Pick It</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="menu thumbnail-row row">
     {% for prod in prod_result %}
       <div class="menu-category panel panel-default" id="detail{{ prod.0 }}">
@@ -62,7 +42,7 @@
         <script>
             $(function () {
                 $('#detail{{ prod.0 }}').popover({
-                    'placement': 'auto',
+                    'placement': 'auto left',
                     'trigger': 'hover',
                     'html': 'true',
                     'content': '<table class="table"><tbody><tr><td class="text-muted">Name</td><td>{{ prod.3 }}</td></tr><tr><td class="text-muted">Description</td><td>{{ prod.4 }}</tr><tr><td class="text-muted">Cost</td><td>{{ prod.6 }} pts</td></tr><tr><td class="text-muted">Status</td><td>{{ prod.7 }}</td></tr><tr><td class="text-muted">Donated Date</td><td>{{ prod.8 }}</td></tr><tr><td class="text-muted">Donor</td><td>{{ prod.9 }}</td></tr></tbody></table>'

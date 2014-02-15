@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^searchitem/', views.searchitem, name='contact'),
     url(r'^shareit/', views.shareItAction, name='contact'),
     url(r'^additem/', views.addItemAction, name='contact'),
+    url(r'^vault/', views.vault, name='vault'),
 )
