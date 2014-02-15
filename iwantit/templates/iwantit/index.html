@@ -52,19 +52,15 @@
             $('.btn btn-primary btn-block').click(function(e){
                 alert("clicked");
             });
-        function makeAjaxCall(itemID){
+        function makeAjaxCall(item_id){
             $.ajax({
             type: 'post',
-            url: "pickitem/",
+            url: "/iwantit/pickitem/",
             data: {
-                'itemID':itemID
+                'item_id':item_id
             },
-            success: function (msg) {
-                alert(msg);
-
-            },
-            error: function (msg) {
-                alert(msg);
+            success: function(msg) {
+                location.reload();
             }
         });
         }

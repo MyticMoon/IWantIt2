@@ -21,7 +21,7 @@
         </p>
         </div>
         <div class="panel-footer">
-            <button class="btn btn-primary btn-block {% if item.6 > user.7 %}disabled{% endif %}">Pick It!</button>
+            <button class="btn btn-primary btn-block {% if item.6 > user.7 %}disabled{% endif %}" onclick="makeAjaxCall({{ item.0 }})">Pick It!</button>
         </div>
       </div>
 
@@ -33,6 +33,18 @@
                     'html': 'true',
                     'content': '<table class="table"><tbody><tr><td class="text-muted">Name</td><td>{{ item.3 }}</td></tr><tr><td class="text-muted">Description</td><td>{{ item.4 }}</tr><tr><td class="text-muted">Cost</td><td>{{ item.6 }} pts</td></tr><tr><td class="text-muted">Status</td><td>{{ item.7 }}</td></tr><tr><td class="text-muted">Donated Date</td><td>{{ item.8 }}</td></tr><tr><td class="text-muted">Donor</td><td>{{ item.9 }}</td></tr></tbody></table>'
             }); });
+            function makeAjaxCall(item_id){
+                $.ajax({
+                type: 'post',
+                url: "/iwantit/pickitem/",
+                data: {
+                    'item_id':item_id
+                },
+                success: function(msg) {
+                    location.reload();
+                }
+            });
+            }
         </script>
     {% endfor %}
     </div>

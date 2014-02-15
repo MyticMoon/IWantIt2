@@ -1,5 +1,5 @@
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader
 from django.db import connection, transaction
 # import models
@@ -46,7 +46,7 @@ def logout(request):
 @transaction.commit_on_success
 def index(request):
     if 'user_id' in request.session and request.session["user_id"] != None:
-        prod_query = "select donatedList.*, userTable.name from donatedList left join userTable on donatedList.donateduserid = userTable.id where donatedList.donateduserid <> " + str(request.session["user_id"]) + " order by donatedate desc limit 7;"
+        prod_query = "select donatedList.*, userTable.name from donatedList left join userTable on donatedList.donateduserid = userTable.id where donatedList.donateduserid <> " + str(request.session["user_id"]) + " and donatedList.status = 'SEL' order by donatedate desc limit 7;"
         cursor1 = connection.cursor()
         cursor1.execute(prod_query)
         prod_result = cursor1.fetchall()
@@ -86,7 +86,7 @@ def contact(request):
 
 def vault(request):
     if 'user_id' in request.session and request.session["user_id"] != None:
-        item_query = "select donatedList.*, userTable.name from donatedList left join userTable on donatedList.donateduserid = userTable.id where donatedList.donateduserid <> " + str(request.session["user_id"])
+        item_query = "select donatedList.*, userTable.name from donatedList left join userTable on donatedList.donateduserid = userTable.id where donatedList.donateduserid <> " + str(request.session["user_id"]) + " and donatedList.status = 'SEL'"
         item_cursor = connection.cursor()
         item_cursor.execute(item_query)
         items = item_cursor.fetchall()
@@ -100,15 +100,20 @@ def vault(request):
 
 @csrf_exempt
 def searchitem(request):
-    searchTerm = request.POST['searchTerm']
-    prod_query = 'select * from donatedList where itemName like "%%' + str(searchTerm) + '%%"'
+    if 'searchTerm' in request.POST:
+        request.session['searchTerm'] = request.POST['searchTerm']
+    prod_query = 'select * from donatedList where itemName like "%%' + str(request.session['searchTerm']) + '%%" and donatedList.status = "SEL" and donatedList.donateduserid <> ' + str(request.session['user_id'])
     cursor1 = connection.cursor()
     cursor1.execute(str(prod_query))
     prod_result = cursor1.fetchall()
+    user_query = "SELECT name, address, birthday, gender, email, hp, imageUrl, currentPoints, numDonatedItem, numRedeemedItem FROM userTable WHERE id = " + str(request.session["user_id"])
+    user_cursor = connection.cursor()
+    user_cursor.execute(user_query)
+    user = user_cursor.fetchall()[0]
     # template = loader.get_template('iwantit/index.html')
     # context = RequestContext(request, prod_result)
     # return HttpResponse(template.render(context))
-    return render_to_response('iwantit/search.html', {'prod_result': prod_result})
+    return render_to_response('iwantit/search.html', {'prod_result': prod_result, 'user': user})
 
 def shareItAction(request):
     return render_to_response('iwantit/shareit.html', {})
@@ -144,4 +149,8 @@ def addItemAction(request):
 def pickitem(request):
     if request.method != "POST":
         return HttpResponse("Bad request")
-    return HttpResponse("Good request")
+    item_id = request.POST.get("item_id")
+    pick_query = "CALL pickItem(%d, %d);" % (int(request.session["user_id"]), int(item_id))
+    pick_cursor = connection.cursor()
+    pick_cursor.execute(pick_query)
+    return HttpResponse('Success')
