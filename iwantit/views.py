@@ -96,8 +96,11 @@ def addItemAction(request):
     prod_query = "INSERT INTO donatedList(donatedUserID, categoryID," \
                  " itemName, description, imageURL, equivalentPoints) VALUE (%d, %d, '%s', '%s', '%s', %d)" % \
                  (userID, categoryID, itemName, description, imageURL, point)
+    item_query = "CALL addNewDonateItem(%d , %d , '%s' ," \
+                 " '%s', '%s' , %d )" % (userID, categoryID, str(itemName), str(description), str(imageURL), point)
+    item_query = str(item_query)
     cursor1 = connection.cursor()
-    cursor1.execute(prod_query)
+    cursor1.execute(item_query)
     prod_result = cursor1.fetchall()
     transaction.commit()
 
