@@ -38,6 +38,10 @@
             $('.btn btn-primary btn-block').click(function(e){
                 alert("clicked");
             });
+        </script>
+    {% endfor %}
+    </div>
+    <script>
         function makeAjaxCall(item_id){
             $.ajax({
             type: 'post',
@@ -50,9 +54,5 @@
             }
         });
         }
-
-
-        </script>
-    {% endfor %}
-    </div>
+    </script>
 {% endblock %}

@@ -33,6 +33,10 @@
                     'html': 'true',
                     'content': '<table class="table"><tbody><tr><td class="text-muted">Name</td><td>{{ item.3 }}</td></tr><tr><td class="text-muted">Description</td><td>{{ item.4 }}</tr><tr><td class="text-muted">Cost</td><td>{{ item.6 }} pts</td></tr><tr><td class="text-muted">Status</td><td>{{ item.7 }}</td></tr><tr><td class="text-muted">Donated Date</td><td>{{ item.8 }}</td></tr><tr><td class="text-muted">Donor</td><td>{{ item.9 }}</td></tr></tbody></table>'
             }); });
+        </script>
+    {% endfor %}
+    </div>
+    <script>
             function makeAjaxCall(item_id){
                 $.ajax({
                 type: 'post',
@@ -45,7 +49,5 @@
                 }
             });
             }
-        </script>
-    {% endfor %}
-    </div>
+    </script>
 {% endblock %}

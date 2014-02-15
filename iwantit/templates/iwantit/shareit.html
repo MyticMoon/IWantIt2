@@ -22,7 +22,7 @@
               <label for="item_name">Item Name</label>
               <input type="text" name="name" class="form-control" id="item_name" placeholder="Enter item name">
                 <label for="item_name">Item Serial Code</label>
-              <input type="text" name="series" class="form-control" id="item_series" placeholder="Enter item name">
+              <input type="text" name="series" class="form-control" id="item_series" placeholder="Enter serial code">
             </div>
             <div class="form-group">
               <label for="item_img_url">Item Image URL</label>
@@ -33,17 +33,16 @@
               <input type="file" id="img_upload">
               <p class="help-block">Max file size of 500KB</p>
             </div>
-                <label>Item Category</label>
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="select_cat">Select 1 category<span class="caret"></span></button>
-                    <ul id="category_list" class="dropdown-menu" name="categorylist" onchange="document.getElementById('myhidden').value = '0'">
-                      <li><a href="#" id="prem_acc">Premium Account/Key</a></li>
-                      <li><a href="#" id="evoucher">e-Voucher</a></li>
-                      <li><a href="#" id="game_credit">Game Credit</a></li>
-                      <li><a href="#" id="game_item">Game Item</a></li>
-                    </ul>
-                  <input type='hidden' id='myhidden' value='' name="category">
-                  </div><!-- /btn-group -->
+                <!--<label>Item Category</label>-->
+                  <!--<div class="input-group-btn">-->
+                    <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="select_cat">Select 1 category<span class="caret"></span></button>-->
+                    <!--<ul class="dropdown-menu">-->
+                      <!--<li><a href="#" id="prem_acc">Premium Account/Key</a></li>-->
+                      <!--<li><a href="#" id="evoucher">e-Voucher</a></li>-->
+                      <!--<li><a href="#" id="game_credit">Game Credit</a></li>-->
+                      <!--<li><a href="#" id="game_item">Game Item</a></li>-->
+                    <!--</ul>-->
+                  <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
              <label>Item Description</label>
              <textarea class="form-control" rows="3" id="form_desc" name="description"></textarea>
             <div class="checkbox">
@@ -63,7 +62,6 @@
               <h4 class="modal-title" id="myModalLabel">Item Summary</h4>
             </div>
             <div class="modal-body">
-              <p>Item Description here</p>
               <P>Do you want to share this item?</P>
             </div>
             <div class="modal-footer">
