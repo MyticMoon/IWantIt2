@@ -55,7 +55,7 @@
         </p>
         </div>
         <div class="panel-footer">
-            <button class="btn btn-primary btn-block">Pick It!</button>
+            <button id="pickit" class="btn btn-primary btn-block" onclick="makeAjaxCall({{ prod.0 }})" >Pick It!</button>
         </div>
       </div>
 
@@ -67,6 +67,29 @@
                     'html': 'true',
                     'content': '<table class="table"><tbody><tr><td class="text-muted">Name</td><td>{{ prod.3 }}</td></tr><tr><td class="text-muted">Description</td><td>{{ prod.4 }}</tr><tr><td class="text-muted">Cost</td><td>{{ prod.6 }} pts</td></tr><tr><td class="text-muted">Status</td><td>{{ prod.7 }}</td></tr><tr><td class="text-muted">Donated Date</td><td>{{ prod.8 }}</td></tr><tr><td class="text-muted">Donor</td><td>{{ prod.9 }}</td></tr></tbody></table>'
             }); });
+
+
+            $('.btn btn-primary btn-block').click(function(e){
+                alert("clicked");
+            });
+        function makeAjaxCall(itemID){
+            $.ajax({
+            type: 'post',
+            url: "pickitem/",
+            data: {
+                'itemID':itemID
+            },
+            success: function (msg) {
+                alert(msg);
+
+            },
+            error: function (msg) {
+                alert(msg);
+            }
+        });
+        }
+
+
         </script>
     {% endfor %}
     </div>

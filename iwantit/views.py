@@ -87,3 +87,8 @@ def addItemAction(request):
 
     return render_to_response('iwantit/successadditem.html', {'point': str(point)})
 
+@csrf_exempt
+def pickitem(request):
+    if request.method != "POST":
+        return HttpResponse("Bad request")
+    return HttpResponse("Good request")
