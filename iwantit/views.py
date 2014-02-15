@@ -1,7 +1,8 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from models import Usertable
+from django.db import connection
+#import models
 from django.template.loader import get_template
 from django.template import Context
 from django.shortcuts import render
@@ -12,7 +13,10 @@ from django.shortcuts import render
 #     return render(request)
 
 def index(request):
-    listUser = Usertable.objects.all()
+    prod_query = "select * from userTable"
+    cursor1 = connection.cursor()
+    cursor1.execute(prod_query)
+    prod_result = cursor1.fetchall()
     template = loader.get_template('iwantit/index.html')
     context = RequestContext(request, None)
     return HttpResponse(template.render(context))
