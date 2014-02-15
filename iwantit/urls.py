@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^profile/', views.profile, name='profile'),
     url(r'^contact/', views.contact, name='contact'),
     url(r'^searchitem/', views.searchitem, name='contact'),
-    url(r'^shareit/', views.shareItAction, name='contact')
+    url(r'^shareit/', views.shareItAction, name='contact'),
+    url(r'^additem/', views.addItemAction, name='contact'),
 )
