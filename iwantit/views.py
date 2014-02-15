@@ -56,3 +56,24 @@ def searchitem(request):
 
 def shareItAction(request):
     return render_to_response('iwantit/shareit.html', {})
+
+@transaction.commit_on_success
+def addItemAction(request):
+    if request.method != "POST":
+        return HttpResponse("Bad request")
+    userID = "0"
+    categoryID = request.POST.get("category")
+    itemName = request.POST.get("item")
+    description = request.POST["description"]
+    imageURL = request.POST.get("image")
+    price = request.POST.get("price")
+
+    prod_query = "select * from donatedList"
+    cursor1 = connection.cursor()
+    cursor1.execute(prod_query)
+    prod_result = cursor1.fetchall()
+    transaction.commit()
+
+    price_number = str(int(price)*100)
+
+    return render_to_response('iwantit/successadditem.html', {'point': price_number})
