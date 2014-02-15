@@ -21,11 +21,11 @@
                                         <td>{{ user.7 }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-muted">Donated items</td>
+                                        <td class="text-muted">Shared items</td>
                                         <td>{{ user.8 }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-muted">Redeemed items</td>
+                                        <td class="text-muted">Picked items</td>
                                         <td>{{ user.9 }}</td>
                                     </tr>
                                 </tbody>
@@ -67,16 +67,55 @@
             </div>
         </div>
 <div class="col-xs-6 col-sm-3 col-md-3">
-    <h3>Donated Items</h3>
-    <ul class="list-unstyled">
+    <h5>Donated Items</h5>
+    <div class="menu">
         {% for donation in donations %}
-            <li>
-                <img src="{{ donation.3 }}" class="img-rounded img-responsive" style="width: 50px; height: 50px"/>
-            </li>
+            <div class="menu-category panel panel-default" id="detail{{ donation.0 }}">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ donation.3 }} <small>{{ donation.6 }} pts</small></h3>
+                </div>
+                <div class="panel-body">
+                <p class="text-justified">
+                  <img src="{{ donation.5 }}" class="img-responsive center-block" style="max-width:180px !important;">
+                </p>
+                </div>
+              </div>
+              <script>
+                    $(function () {
+                        $('#detail{{ donation.0 }}').popover({
+                            'placement': 'left',
+                            'trigger': 'hover',
+                            'html': 'true',
+                            'content': '<table class="table"><tbody><tr><td class="text-muted">Name</td><td>{{ donation.3 }}</td></tr><tr><td class="text-muted">Description</td><td>{{ donation.4 }}</tr><tr><td class="text-muted">Cost</td><td>{{ donation.6 }} pts</td></tr><tr><td class="text-muted">Status</td><td>{{ donation.7 }}</td></tr><tr><td class="text-muted">Donated Date</td><td>{{ donation.8 }}</td></tr></tbody></table>'
+                    }); });
+                </script>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 <div class="col-xs-6 col-sm-3 col-md-3">
-    <h3>Redeemed Items</h3>
+    <h5>Redeemed Items</h5>
+    <div class="menu">
+        {% for redeem in redeems %}
+            <div class="menu-category panel panel-default" id="detail{{ redeem.0 }}">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ redeem.3 }} <small>{{ redeem.6 }} pts</small></h3>
+                </div>
+                <div class="panel-body">
+                <p class="text-justified">
+                  <img src="{{ redeem.5 }}" class="img-responsive center-block" style="max-width:180px !important;">
+                </p>
+                </div>
+              </div>
+              <script>
+                    $(function () {
+                        $('#detail{{ redeem.0 }}').popover({
+                            'placement': 'left',
+                            'trigger': 'hover',
+                            'html': 'true',
+                            'content': '<table class="table"><tbody><tr><td class="text-muted">Name</td><td>{{ redeem.3 }}</td></tr><tr><td class="text-muted">Description</td><td>{{ redeem.4 }}</tr><tr><td class="text-muted">Cost</td><td>{{ redeem.6 }} pts</td></tr><tr><td class="text-muted">Status</td><td>{{ redeem.7 }}</td></tr><tr><td class="text-muted">Donated Date</td><td>{{ redeem.8 }}</td></tr></tbody></table>'
+                    }); });
+                </script>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
