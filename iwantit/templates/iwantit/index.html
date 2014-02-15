@@ -5,6 +5,8 @@
 <li><a href="/iwantit/contact">Contact</a></li>
 {% endblock %}
 {% block content %}
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
       <div class="jumbotron">
         <h1>Welcome to I Want It</h1>
         <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
@@ -42,9 +44,8 @@
       </div>
     </div>
 
-    <!--Item to trigger modal -->
-    <div class="row">
     {% for prod in prod_result %}
+{#    <a href="http://google.com">#}
       <div class="col-sm-6 col-md-3" data-toggle="modal" data-target="#myModal">
         <div class="thumbnail" >
           <img src="{{ prod.5 }}" alt="..." height="150px" width="100px">
@@ -53,6 +54,7 @@
           </div>
         </div>
       </div>
+{#    </a>#}
     {% endfor %}
 {#      <div class="col-sm-6 col-md-3">#}
 {#        <div class="thumbnail">#}
