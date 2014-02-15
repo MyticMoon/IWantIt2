@@ -9,37 +9,56 @@
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img src="http://placehold.it/500x500" alt="" class="img-circle img-responsive" />
+                        <img src="{{ user.6 }}" alt="{{ user.0 }}'s photo" style="width:170px !important; height:170px !important" class="img-thumbnail" />
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h4><strong>Bhaumik Patel</strong></h4>
+                        <h4><strong>{{ user.0 }}</strong></h4>
+                        <h5><strong>Account Info</strong></h5>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-muted">Point</td>
+                                        <td>{{ user.7 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Donated items</td>
+                                        <td>{{ user.8 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Redeemed items</td>
+                                        <td>{{ user.9 }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         <h5><strong>Basic Info</strong></h5>
                             <table class="table table-condensed">
                                 <tbody>
                                     <tr>
                                         <td class="text-muted">Address</td>
-                                        <td>San Francisco, USA</td>
+                                        <td>{{ user.1 }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Birthday</td>
-                                        <td>June 02, 1998</td>
+                                        <td>{{ user.2 }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Gender</td>
-                                        <td>Male</td>
+                                        <td>{% if user.3 == 'M' %}Male{% endif %}
+                                            {% if user.3 == 'F' %}Female{% endif %}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        <h5><strong>Contact Information</strong></h5>
+                        <h5><strong>Contact Info</strong></h5>
                             <table class="table table-condensed">
                                 <tbody>
                                     <tr>
                                         <td class="text-muted">Email</td>
-                                        <td>email@example.com</td>
+                                        <td>{{ user.4 }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Phone</td>
-                                        <td>999999</td>
+                                        <td>{{ user.5 }}s</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -47,4 +66,17 @@
                 </div>
             </div>
         </div>
+<div class="col-xs-6 col-sm-3 col-md-3">
+    <h3>Donated Items</h3>
+    <ul class="list-unstyled">
+        {% for donation in donations %}
+            <li>
+                <img src="{{ donation.3 }}" class="img-rounded img-responsive" style="width: 50px; height: 50px"/>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="col-xs-6 col-sm-3 col-md-3">
+    <h3>Redeemed Items</h3>
+</div>
 {% endblock %}
