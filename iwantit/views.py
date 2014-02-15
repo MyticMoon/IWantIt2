@@ -6,6 +6,7 @@ from django.db import connection, transaction
 from django.template.loader import get_template
 from django.template import Context
 from django.shortcuts import render, render_to_response
+from random import randint
 #
 # def index(request):
 #     t = get_template('iwantit/index.html')
@@ -62,20 +63,21 @@ def shareItAction(request):
 def addItemAction(request):
     if request.method != "POST":
         return HttpResponse("Bad request")
-    userID = "0"
-    categoryID = 0
+    userID = 0
+    categoryID = 1
     #TODO hard code to 0 here
     itemName = request.POST.get("name")
     description = request.POST["description"]
     imageURL = request.POST.get("image")
     price = request.POST.get("price")
+    point = randint(1000,5000)
 
-    # prod_query = "select * from donatedList"
-    # cursor1 = connection.cursor()
-    # cursor1.execute(prod_query)
-    # prod_result = cursor1.fetchall()
-    # transaction.commit()
+    prod_query = "INSERT INTO donatedList(donatedUserID, categoryID," \
+                 " itemName, description, imageURL, equivalentPoints) VALUE (%d, %d, '%s', '%s', '%s', %d)" % \
+                 (userID, categoryID, itemName, description, imageURL, point)
+    cursor1 = connection.cursor()
+    cursor1.execute(prod_query)
+    prod_result = cursor1.fetchall()
+    transaction.commit()
 
-    price_number = str(int(price)*100)
-
-    return render_to_response('iwantit/successadditem.html', {'point': price_number})
+    return render_to_response('iwantit/successadditem.html', {'point': str(point)})
