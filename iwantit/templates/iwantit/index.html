@@ -1,4 +1,4 @@
-{% extends "iwantit\template.html" %}
+{% extends "iwantit/template.html" %}
 {% block navlist %}
 <li class="active"><a href="/iwantit/">Home</a></li>
 <li><a href="/iwantit/profile">Profile</a></li>
@@ -7,7 +7,7 @@
 {% block content %}
     <div class="jumbotron">
         <h1>Welcome to I Want It</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+        <p class="lead">This is a cool system where you can give away items that you no longer need in exchange for stuffs that you may desire for!</p>
         <div class= "row">
           <div class="col-md-3"></div>
           <div class="col-md-6">
@@ -27,7 +27,7 @@
     {% for prod in prod_result %}
       <div class="menu-category panel panel-default" id="detail{{ prod.0 }}">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ prod.3 }} <small>{{ prod.6 }} pts</small></h3>
+            <h3 class="panel-title">{{ prod.3 }} <small class="{% if prod.6 > user.7 %}text-danger{% else %}text-success{% endif %}">{{ prod.6 }} pts</small></h3>
         </div>
         <div class="panel-body">
         <p class="text-justified">
@@ -35,7 +35,7 @@
         </p>
         </div>
         <div class="panel-footer">
-            <button class="btn btn-primary btn-block">Pick It!</button>
+            <button id="pickit" class="btn btn-primary btn-block {% if prod.6 > user.7 %}disabled{% endif %}" onclick="makeAjaxCall({{ prod.0 }})" >Pick It!</button>
         </div>
       </div>
 
@@ -47,6 +47,29 @@
                     'html': 'true',
                     'content': '<table class="table"><tbody><tr><td class="text-muted">Name</td><td>{{ prod.3 }}</td></tr><tr><td class="text-muted">Description</td><td>{{ prod.4 }}</tr><tr><td class="text-muted">Cost</td><td>{{ prod.6 }} pts</td></tr><tr><td class="text-muted">Status</td><td>{{ prod.7 }}</td></tr><tr><td class="text-muted">Donated Date</td><td>{{ prod.8 }}</td></tr><tr><td class="text-muted">Donor</td><td>{{ prod.9 }}</td></tr></tbody></table>'
             }); });
+
+
+            $('.btn btn-primary btn-block').click(function(e){
+                alert("clicked");
+            });
+        function makeAjaxCall(itemID){
+            $.ajax({
+            type: 'post',
+            url: "pickitem/",
+            data: {
+                'itemID':itemID
+            },
+            success: function (msg) {
+                alert(msg);
+
+            },
+            error: function (msg) {
+                alert(msg);
+            }
+        });
+        }
+
+
         </script>
     {% endfor %}
     </div>
