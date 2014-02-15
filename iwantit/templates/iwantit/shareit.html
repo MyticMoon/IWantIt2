@@ -1,0 +1,57 @@
+{% extends "iwantit\template.html" %}
+{% block navlist %}
+<li class="active"><a href="/iwantit/">Home</a></li>
+<li><a href="/iwantit/profile">Profile</a></li>
+<li><a href="/iwantit/contact">Contact</a></li>
+{% endblock %}
+{% block content %}
+ <div class="page-header">
+  <h1 align = "center">Share It</h1>
+  <h3 align = "center">Share your items here and get points!</h3>
+</div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <div class="container">
+    <div class="col-md-6">
+              <form role="form">
+            <div class="form-group">
+              <label for="item_name">Item Name</label>
+              <input type="text" class="form-control" id="item_name" placeholder="Enter item name">
+            </div>
+            <div class="form-group">
+              <label for="item_img_url">Item Image URL</label>
+              <input type="password" class="form-control" id="item_img_url" placeholder="Enter image URL">
+            </div>
+            <div class="form-group">
+              <label for="img_upload">Upload Image from Computer</label>
+              <input type="file" id="img_upload">
+              <p class="help-block">Max file size of 500KB</p>
+            </div>
+                <label>Item Category</label>
+                <div class="input-group">
+                  <input type="text" class="form-control">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Select 1 category<span class="caret"></span></button>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a href="#">Premium Account/Key</a></li>
+                      <li><a href="#">e-Voucher</a></li>
+                      <li><a href="#">Game Credit</a></li>
+                      <li><a href="#">Game Item</a></li>
+                    </ul>
+                  </div><!-- /btn-group -->
+                </div><!-- /input-group -->
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> I agree to the <a href="http://www.quickmeme.com/img/61/618e696a9a3bb94843160966c80792169d02f0072c9d2c44ae49d77d841bffc1.jpg">Terms and Conditions.</a>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-default">Share It</button>
+          </form>
+      </div>
+  </div>
+
+{% endblock %}
