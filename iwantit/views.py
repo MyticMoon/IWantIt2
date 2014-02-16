@@ -146,6 +146,7 @@ def addItemAction(request):
     return render_to_response('iwantit/successadditem.html', {'point': str(point)})
 
 @csrf_exempt
+@transaction.commit_on_success
 def pickitem(request):
     if request.method != "POST":
         return HttpResponse("Bad request")
@@ -153,4 +154,5 @@ def pickitem(request):
     pick_query = "CALL pickItem(%d, %d);" % (int(request.session["user_id"]), int(item_id))
     pick_cursor = connection.cursor()
     pick_cursor.execute(pick_query)
+    transaction.commit()
     return HttpResponse('Success')
